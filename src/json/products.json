@@ -1,0 +1,28 @@
+[
+	{
+		"id": 1,
+		"title": "Leche",
+		"description": "Leche Entera Sachet 1L",
+		"price": "$150",
+		"thumbnails": [
+			"LecheEntera.jpg"
+		],
+		"code": "2000",
+		"stock": "Lacteos",
+		"category": "5",
+		"status": true
+	},
+	{
+		"id": 2,
+		"title": "Gaseosa",
+		"description": "Gaseosa de Pomelo",
+		"price": "$120",
+		"thumbnails": [
+			"gaseosa.jpg"
+		],
+		"code": "2001",
+		"stock": "Bebidas",
+		"category": "5",
+		"status": true
+	}
+]
