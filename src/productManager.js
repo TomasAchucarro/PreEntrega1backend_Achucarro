@@ -10,8 +10,7 @@ class ProductManager {
     try {
       return JSON.parse(await fs.promises.readFile(this.#path, "utf-8"));
     } catch (error) {
-      console.log("error: archivo no encontrado");
-      return [];
+      throw new Error("File doesnot exist");
     }
   };
 
@@ -22,7 +21,7 @@ class ProductManager {
     thumbnails,
     code,
     stock,
-    category,
+    category
   ) => {
     try {
       const products = await this.getProducts();
@@ -68,8 +67,7 @@ class ProductManager {
       console.log("Product deleted");
       return deletedProduct;
     } catch (error) {
-      console.error("Error deleting product:", error);
-      return null;
+      throw new Error("Error deleting product:");
     }
   };
 
@@ -106,8 +104,7 @@ class ProductManager {
       const product = products.find((product) => product.id === id);
       return product || null;
     } catch (error) {
-      console.error("Error retrieving product:", error);
-      return null;
+      throw new Error("Error retrieving product:");
     }
   };
 }

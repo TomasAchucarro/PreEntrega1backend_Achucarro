@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
     res.json({ message: "New cart added succefully", addCart });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -17,6 +17,10 @@ router.post("/:cid/product/:pid", async (req, res) => {
   try {
     const cartId = parseInt(req.params.cid);
     const productId = parseInt(req.params.pid);
+
+    if (isNaN(cartId) || isNaN(productId)) {
+      return res.status(400).json({ error: "Invalid cartId or productId" });
+    }
 
     if (productId <= 0) {
       return res.status(404).json({ error: "Not valid product" });
@@ -26,14 +30,14 @@ router.post("/:cid/product/:pid", async (req, res) => {
     if (!cart) {
       return res
         .status(404)
-        .json({ error: `The cart with id ${cartId} doesnot exist` });
+        .json({ error: `The cart with id ${cartId} does not exist` });
     }
     res.json(cart);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: error.message });
   }
 });
+
 
 router.get("/:cid", async (req, res) => {
   try {
@@ -47,7 +51,7 @@ router.get("/:cid", async (req, res) => {
     res.send(cart);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: error.message });
   }
 });
 

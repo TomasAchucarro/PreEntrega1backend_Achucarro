@@ -8,8 +8,7 @@ router.get("/", async (req, res) => {
     const products = await productManager.getProducts();
     res.send({ products });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -22,8 +21,7 @@ router.get("/:pid", async (req, res) => {
     }
     res.send(product);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -60,7 +58,6 @@ router.post("/", async (req, res) => {
     }
     return res.status(404).json({ error: "Error adding a product" });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ error: "Server error" });
   }
 });
@@ -83,7 +80,6 @@ router.put("/:pid", async (req, res) => {
     await productManager.updateProduct(productId, updatedProduct);
     res.json({ message: `Product with ID ${productId} updated successfully` });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: error });
   }
 });
@@ -102,8 +98,7 @@ router.delete("/:pid", async (req, res) => {
       message: `Product with ID ${productId} deleted successfully`,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
   }
 });
 
